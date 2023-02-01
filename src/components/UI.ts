@@ -1,6 +1,6 @@
 // eslint-disable-next-line
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const ball = keyframes`
   from {
@@ -11,55 +11,71 @@ const ball = keyframes`
   }
 `;
 
-const links = {
+type LinkStyle = {
+  color: string;
+  colorHover: string;
+};
+
+type AlertStyle = {
+  color: string;
+  background: string;
+};
+
+type ButtonStyle = {
+  background: string;
+  backgroundActive: string;
+  color: string;
+};
+
+const links: Record<string, LinkStyle> = {
   default: {
-    color: '#2895f1',
-    colorHover: '#32325d',
+    color: "#2895f1",
+    colorHover: "#32325d",
   },
   danger: {
-    color: '#d14',
-    colorHover: '#d14',
+    color: "#d14",
+    colorHover: "#d14",
   },
   secondary: {
-    color: '#525f7f',
-    colorHover: '#32325d',
+    color: "#525f7f",
+    colorHover: "#32325d",
   },
 };
 
-const alerts = {
+const alerts: Record<string, AlertStyle> = {
   warning: {
-    color: '#8a6d3b',
-    background: '#fcf9e9',
+    color: "#8a6d3b",
+    background: "#fcf9e9",
   },
   danger: {
-    color: '#d14',
-    background: 'rgba(221, 17, 68, .1)',
+    color: "#d14",
+    background: "rgba(221, 17, 68, .1)",
   },
   info: {
-    color: '#fff',
-    background: '#f7fafc',
+    color: "#fff",
+    background: "#f7fafc",
   },
   success: {
-    color: '#3c763d',
-    background: '#f6fff5',
+    color: "#3c763d",
+    background: "#f6fff5",
   },
 };
 
-const buttons = {
+const buttons: Record<string, ButtonStyle> = {
   default: {
-    background: '#fff',
-    backgroundActive: '#f2f6fa',
-    color: '#32325d',
+    background: "#fff",
+    backgroundActive: "#f2f6fa",
+    color: "#32325d",
   },
   primary: {
-    background: '#32325d',
-    backgroundActive: '#43458b',
-    color: '#fff',
+    background: "#32325d",
+    backgroundActive: "#43458b",
+    color: "#fff",
   },
   danger: {
-    background: '#d14',
-    backgroundActive: '#c71e48',
-    color: '#fff',
+    background: "#d14",
+    backgroundActive: "#c71e48",
+    color: "#fff",
   },
 };
 
@@ -73,7 +89,7 @@ export const Badge = styled.span`
   line-height: 1;
   font-weight: 700;
   background: #32325d;
-  transition: background .15s;
+  transition: background 0.15s;
   border-radius: 10px;
   padding: 3px 6px;
   height: auto;
@@ -90,17 +106,17 @@ export const Center = styled.div`
 `;
 
 export const Link = styled.a`
-  color: ${props => links[props.modifier].color};
-  transition: color .1s;
+  color: ${(props) => links[props.modifier].color};
+  transition: color 0.1s;
   text-decoration: none;
 
   :hover {
-    color: ${props => links[props.modifier].colorHover};
+    color: ${(props) => links[props.modifier].colorHover};
   }
 `;
 
 Link.defaultProps = {
-  modifier: 'default', 
+  modifier: "default",
 };
 
 export const FlatButton = styled.button`
@@ -121,13 +137,13 @@ export const FlatButton = styled.button`
   touch-action: manipulation;
   cursor: pointer;
   user-select: none;
-  transition: all .15s ease;
+  transition: all 0.15s ease;
   outline: none;
   min-height: 38px;
 
   :hover {
     background: #f6f9fc;
-    transition-duration: .15s;
+    transition-duration: 0.15s;
   }
 
   :active {
@@ -135,8 +151,8 @@ export const FlatButton = styled.button`
   }
 
   svg {
-    width: ${props => props.icon ? '24px' : '16px'};
-    height: ${props => props.icon ? '24px' : '16px'};
+    width: ${(props) => (props.icon ? "24px" : "16px")};
+    height: ${(props) => (props.icon ? "24px" : "16px")};
   }
 
   svg + span {
@@ -146,19 +162,21 @@ export const FlatButton = styled.button`
 
 export const Button = styled(FlatButton)`
   border-color: #e6ebf1;
-  box-shadow: 0 1px 3px rgba(0,0,0,.08);
-  background: ${props => buttons[props.modifier].background};
-  color: ${props => buttons[props.modifier].color};
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: ${(props) => buttons[props.modifier].background};
+  color: ${(props) => buttons[props.modifier].color};
 
   :focus,
   :hover {
-    background: ${props => buttons[props.modifier].backgroundActive};
-    color: ${props => buttons[props.modifier].colorActive || buttons[props.modifier].color };
+    background: ${(props) => buttons[props.modifier].backgroundActive};
+    color: ${(props) =>
+      //TODO: ERROR IDENTIFIED
+      buttons[props.modifier].colorActive || buttons[props.modifier].color};
   }
 `;
 
 Button.defaultProps = {
-  modifier: 'default',
+  modifier: "default",
 };
 
 export const IconButton = styled.button`
@@ -168,7 +186,7 @@ export const IconButton = styled.button`
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 14px;
@@ -202,32 +220,32 @@ export const Label = styled.span`
   font-weight: 700;
 `;
 
-export const Alert = styled.div.attrs(props => alerts[props.type])`
-  background-color: ${props => props.background};
+export const Alert = styled.div.attrs((props) => alerts[props.type])`
+  background-color: ${(props) => props.background};
   border: 0;
   border-radius: 4px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   padding: 12px;
   font-size: 12px;
 `;
 
 Alert.defaultProps = {
-  type: 'success',
+  type: "success",
 };
 
-export const TextAlert = styled.h5.attrs(props => alerts[props.type])`
-  color: ${props => props.color};
+export const TextAlert = styled.h5.attrs((props) => alerts[props.type])`
+  color: ${(props) => props.color};
   margin-top: 0;
 `;
 
 TextAlert.defaultProps = {
-  type: 'success',
+  type: "success",
 };
 
 export const IconBox = styled.div`
   display: inline-block;
   vertical-align: middle;
-  color: ${props => props.type ? alerts[props.type].color : '#32325d'};
+  color: ${(props) => (props.type ? alerts[props.type].color : "#32325d")};
 
   svg {
     fill: currentColor;
@@ -238,22 +256,22 @@ export const IconBox = styled.div`
 
 export const LoadingDot = styled.div`
   transform: translate(-50%, -50%);
-  content: '';
+  content: "";
   display: block;
-  width: ${props => `${props.size}px`};
-  height: ${props => `${props.size}px`};
+  width: ${(props) => `${props.size}px`};
+  height: ${(props) => `${props.size}px`};
   border-radius: 50%;
   background: #32325d;
   z-index: 2;
-  margin: ${props => `${props.size}px`} 4px 0;
-  animation: ${ball} .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+  margin: ${(props) => `${props.size}px`} 4px 0;
+  animation: ${ball} 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
 
   :nth-child(1) {
-    animation-delay: .15s;
+    animation-delay: 0.15s;
   }
-  
+
   :nth-child(3) {
-    animation-delay: .3s;
+    animation-delay: 0.3s;
   }
 `;
 
@@ -265,6 +283,3 @@ export const LoadingBox = styled.div`
   position: relative;
   display: flex;
 `;
-
-
-
